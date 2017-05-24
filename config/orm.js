@@ -6,23 +6,23 @@ var connection = require("../config/connection.js");
 
 var orm = {
     getUndevouredBurgers: function(cb) {
-        var queryString = "SELECT * FROM burgers where devoured=false";
+        var queryString = "SELECT * FROM burgers where devoured=false order by id desc";
         connection.query(queryString, [], function(err, result) {
-            console.log('orm.getUndevouredBurgers\n' + JSON.stringify(result));
+            //console.log('orm.getUndevouredBurgers\n' + JSON.stringify(result));
             cb(result);
         });
     },
     getDevouredBurgers: function(cb) {
         var queryString = "SELECT * FROM burgers where devoured=true";
         connection.query(queryString, [], function(err, result) {
-            console.log(result);
+            //console.log(result);
             cb(result);
         });
     },
     addNewBurger: function(burgerName,cb) {
         var queryString = "Insert into burgers (burger_name,devoured) values('" + burgerName + "',false)";
         connection.query(queryString, [], function(err, result) {
-            console.log(result);
+            //console.log(result);
             if (err) {
                 throw err;
             }
@@ -31,8 +31,18 @@ var orm = {
     },
     devourBurger: function(burgerId,cb) {
         var queryString = "update burgers set devoured=true where id = " + burgerId;
-        connection.query(queryString, [], function(err, result) {
-            console.log(result);
+        connection.query(queryString, function(err, result) {
+            //console.log(result);
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    },
+    deleteBurger: function(burgerId,cb) {
+        var queryString = "delete from burgers where id = " + burgerId;
+        //console.log(queryString);
+        connection.query(queryString, function(err,result) {
             if (err) {
                 throw err;
             }

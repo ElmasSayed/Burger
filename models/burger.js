@@ -16,9 +16,15 @@ var modelBurger = {
             cb(res);
         });
     },
-	devourBurger: function(burgerid,cb) {
-		orm.devourBurger(burgerid,function(res) {
+	devourBurger: function(burgerId,cb) {
+		orm.devourBurger(burgerId,function(res) {
             cb(res);
+        });
+    },
+	deleteBurger: function(burgerId,cb) {
+		//console.log("DELETE BURGER - model burger: " + burgerId);
+		orm.deleteBurger(burgerId,function(res) {
+             cb(res);
         });
     }
 }
