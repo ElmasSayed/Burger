@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
-var port = 8086;
+var port = process.env.PORT || 8086;
 var app = express();
 
 // Serve static content for the app from the "public" directory in the application directory.
@@ -23,7 +23,6 @@ var routes = require("./controllers/burgers_controller.js");
 app.use("/", routes);
 
 //app.listen(port);
-app.listen(port, function(req,res){
-	console.log("listening at " + port);
+app.listen(port, function(req, res) {
+    console.log("listening at " + port);
 });
-
